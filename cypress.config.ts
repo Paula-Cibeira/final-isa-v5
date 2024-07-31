@@ -22,7 +22,7 @@ export default defineConfig({
       return (await import('./src/test/javascript/cypress/plugins/index')).default(on, config);
     },
     baseUrl: 'http://localhost:8080/',
-    specPattern: 'src/test/javascript/cypress/e2e/**/*.cy.ts',
+    specPattern: 'src/test/javascript/cypress/e2e/mytest/**/*.cy.ts', //remover mytest para mostrarles todos
     supportFile: 'src/test/javascript/cypress/support/index.ts',
     experimentalRunAllSpecs: true,
   },
