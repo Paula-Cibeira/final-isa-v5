@@ -8,6 +8,19 @@ import org.junit.jupiter.api.Test;
 
 class BlogTest {
 
+    // para correr estos test: ./mvnw -Dtest=BlogTest test
+    @Test
+    void testBlogCreation() {
+        // Creo un Blog con valores válidos
+        Blog blog = new Blog();
+        blog.setName("Test Blog");
+        blog.setHandle("testhandle");
+
+        // Verifico que los valores son correctos
+        assertThat(blog.getName()).isEqualTo("Test Blog");
+        assertThat(blog.getHandle()).isEqualTo("testhandle");
+    }
+
     @Test
     void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Blog.class);

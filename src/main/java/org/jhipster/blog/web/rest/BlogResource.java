@@ -150,7 +150,7 @@ public class BlogResource {
         if (eagerload) {
             return blogRepository.findAllWithEagerRelationships();
         } else {
-            return blogRepository.findByUserIsCurrentUser();
+            return blogRepository.findAll();
         }
     }
 

@@ -5,12 +5,28 @@ import static org.jhipster.blog.domain.BlogTestSamples.*;
 import static org.jhipster.blog.domain.PostTestSamples.*;
 import static org.jhipster.blog.domain.TagTestSamples.*;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 import org.jhipster.blog.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
 
 class PostTest {
+
+    // para correr estos test: ./mvnw -Dtest=PostTest test
+    @Test
+    void testPostCreation() {
+        // Creo un Post con valores válidos
+        Post post = new Post();
+        post.setTitle("Test Post");
+        post.setContent("Soy el contenido del test");
+        post.setDate(Instant.now());
+
+        // Verifico que los valores son correctos
+        assertThat(post.getTitle()).isEqualTo("Test Post");
+        assertThat(post.getContent()).isEqualTo("Soy el contenido del test");
+        assertThat(post.getDate()).isNotNull();
+    }
 
     @Test
     void equalsVerifier() throws Exception {
