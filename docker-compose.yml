@@ -19,8 +19,71 @@ services:
       - SPRING_DATASOURCE_USERNAME=sa
       - SPRING_DATASOURCE_PASSWORD=
       - SPRING_LIQUIBASE_URL=jdbc:h2:file:./target/h2db/db/blog;DB_CLOSE_DELAY=-1
+      - LOGSTASH_HOST=logstash
     ports:
       - '8080:8080'
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+    container_name: elasticsearch
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    configs:
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      ES_JAVA_OPTS: '-Xmx256m -Xms256m'
+      ELASTIC_PASSWORD: changeme
+      # Use single node discovery in order to disable production mode and avoid bootstrap checks
+      # see https://www.elastic.co/guide/en/elasticsearch/reference/current/bootstrap-checks.html
+      discovery.type: single-node
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.6.2
+    container_name: logstash
+    ports:
+      - '5000:5000'
+      - '9600:9600'
+    configs:
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_pipeline
+        target: /usr/share/logstash/pipeline/logstash.conf
+    environment:
+      LS_JAVA_OPTS: '-Xmx256m -Xms256m'
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.2
+    container_name: kibana
+    ports:
+      - '5601:5601'
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    deploy:
+      mode: replicated
+      replicas: 1
+
+configs:
+  elastic_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  logstash_pipeline:
+    file: ./logstash/pipeline/logstash.conf
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+
+volumes:
+  esdata:
+    driver: local
+
     #healthcheck:
     #test:
     # - CMD
