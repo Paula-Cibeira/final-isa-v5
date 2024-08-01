@@ -1,0 +1,41 @@
+2: dos test de unidad
+
+./mvnw -Dtest=BlogTest test
+
+4: DEPLOY EN DOCKER
+
+jhipster docker-compose
+
+docker compose up -d
+
+5: docker-compose
+
+docker-compose up --build
+
+docker-compose up -d #los levanto en segundo plano
+
+docker-compose down
+
+verificar que los contenedores están corriendo correctamente usando el comando:
+
+docker-compose ps
+
+kibana:
+
+http://localhost:5601/app/kibana#/management/elasticsearch/index_management/templates
+
+6: crear una aplicacion progresiva en ionic que consuma una API del proyecto jhipster
+
+docker-compose up -d
+
+ionic start blogPWA blank --type=angular
+
+ionic serve #Esto iniciará el servidor de desarrollo y abrirá tu aplicación en el navegador  `http://localhost:8100`
+
+entro en myPWA y funciona: ng serve --host=localhost --port=8100
+
+7- Usarlo offline
+
+ ionic build --prod
+
+http-server ./www
