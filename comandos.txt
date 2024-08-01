@@ -36,6 +36,6 @@ entro en myPWA y funciona: ng serve --host=localhost --port=8100
 
 7- Usarlo offline
 
- ionic build --prod
+ionic build --prod
 
 http-server ./www
