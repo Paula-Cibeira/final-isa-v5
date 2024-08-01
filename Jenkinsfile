@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'mpcibeira'
-        DOCKERHUB_REPO = 'mpcibeira/jenkins' 
+        DOCKER_CREDENTIALS_ID = 'paula-admin'
+        DOCKERHUB_REPO = 'paula-admin/jenkins' 
     }
 
     stages {
