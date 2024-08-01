@@ -1,6 +1,7 @@
 {
   "generator-jhipster": {
     "applicationType": "monolith",
+    "appsFolders": ["final-isa-v5"],
     "authenticationType": "jwt",
     "baseName": "blog",
     "buildTool": "maven",
@@ -14,6 +15,7 @@
     "databaseType": "sql",
     "devDatabaseType": "h2Disk",
     "devServerPort": 4200,
+    "directoryPath": "../",
     "enableHibernateCache": true,
     "enableSwaggerCodegen": false,
     "enableTranslation": true,
@@ -26,6 +28,7 @@
     "messageBroker": false,
     "microfrontend": null,
     "microfrontends": [],
+    "monitoring": "no",
     "nativeLanguage": "en",
     "packageName": "org.jhipster.blog",
     "prodDatabaseType": "postgresql",
@@ -33,7 +36,7 @@
     "searchEngine": false,
     "serverPort": null,
     "serverSideOptions": [],
-    "serviceDiscoveryType": false,
+    "serviceDiscoveryType": "no",
     "syncUserWithIdp": null,
     "testFrameworks": ["cypress"],
     "websocket": false,

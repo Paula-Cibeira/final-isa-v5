@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  autoheal:
+    restart: always
+    image: willfarrell/autoheal
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  blog:
+    build: .
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - SPRING_PROFILES_ACTIVE=dev,api-docs
+      - MANAGEMENT_PROMETHEUS_METRICS_EXPORT_ENABLED=true
+      # Cambia la URL de la base de datos a H2
+      - SPRING_DATASOURCE_URL=jdbc:h2:file:./target/h2db/db/blog;DB_CLOSE_DELAY=-1
+      - SPRING_DATASOURCE_USERNAME=sa
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_LIQUIBASE_URL=jdbc:h2:file:./target/h2db/db/blog;DB_CLOSE_DELAY=-1
+    ports:
+      - '8080:8080'
+    #healthcheck:
+    #test:
+    # - CMD
+    # - curl
+    # - '-f'
+    #- http://localhost:8080/management/health
+    #interval: 5s
+    #timeout: 5s
+    #retries: 40
+    #depends_on:
+    #blog-postgresql:
+    #condition: service_healthy
+  #blog-postgresql:
+  #image: postgres:16.3
+  #container_name: final-isa-v5-blog-postgresql-1
+  #environment:
+  #POSTGRES_USER: myuser       # Nombre de usuario para PostgreSQL
+  #POSTGRES_PASSWORD: mypassword # Contraseña para el usuario
+  #POSTGRES_DB: mydb            # Nombre de la base de datos (opcional)
+  #POSTGRES_HOST_AUTH_METHOD: trust # Método de autenticación para el desarrollo
+  #healthcheck:
+  #test: ["CMD-SHELL", "pg_isready -U myuser"]
+  #interval: 10s
+  #retries: 5
+  #start_period: 30s
+  #timeout: 5s
