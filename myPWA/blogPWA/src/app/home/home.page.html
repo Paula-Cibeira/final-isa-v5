@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title> Posts </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Title</ion-col>
+      <ion-col>Content</ion-col>
+      <ion-col>Date</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let post of posts">
+      <ion-col>{{ post.title }}</ion-col>
+      <ion-col>{{ post.content }}</ion-col>
+      <ion-col>{{ post.date}}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
