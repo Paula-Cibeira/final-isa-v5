@@ -20,6 +20,12 @@ logging:
     org.hibernate.SQL: DEBUG
     org.jhipster.blog: DEBUG
 
+logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+  enabled: true
+  host: logstash
+  port: 5000
+  ring-buffer-size: 512
+
 spring:
   devtools:
     restart:
@@ -92,11 +98,7 @@ jhipster:
     base-url: http://127.0.0.1:8080
   logging:
     use-json-format: false # By default, logs are not in Json format
-    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
-      enabled: false
-      host: localhost
-      port: 5000
-      ring-buffer-size: 512
+
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class
